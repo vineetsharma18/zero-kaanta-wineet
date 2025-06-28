@@ -3,26 +3,61 @@ let turnX = true;
 let msg = document.querySelector(".win");
 let reset = document.querySelector(".reset");
 let cc=0;
+let movesX = [];
+let movesO = [];
 
-boxes.forEach((box) => {
-    box.addEventListener("click", () => {
-    if(turnX){
-    box.classList.add("diff");
-    box.innerText = "X";
-    turnX = false;
 
-    } else{
-        box.classList.remove("diff");
-        box.innerText = "O";
-        turnX = true;
+function applyFading() {
+    // Remove all existing fading
+    boxes.forEach(b => b.classList.remove("fading"));
+
+    if (turnX && movesX.length === 3) {
+        boxes[movesX[0]].classList.add("fading");
+    } else if (!turnX && movesO.length === 3) {
+        boxes[movesO[0]].classList.add("fading");
     }
-    cc++;
-    box.disabled = true;
-    checkWinner();
-    checkDraw();
+}
 
+boxes.forEach((box, index) => {
+    box.addEventListener("click", () => {
+        if (box.innerText !== "") return;
+
+        // Player is placing their move
+        box.disabled = true;
+        box.innerText = turnX ? "X" : "O";
+        box.classList.toggle("diff", turnX);
+
+        if (turnX) {
+            movesX.push(index);
+
+            if (movesX.length > 3) {
+                let removed = movesX.shift();
+                boxes[removed].innerText = "";
+                boxes[removed].disabled = false;
+            }
+        } else {
+            movesO.push(index);
+
+            if (movesO.length > 3) {
+                let removed = movesO.shift();
+                boxes[removed].innerText = "";
+                boxes[removed].disabled = false;
+            }
+        }
+
+        checkWinner();
+        // checkDraw(); // optional
+
+        turnX = !turnX;
+        cc++;
+
+        // NOW: Apply fading for the NEXT player at the start of their turn
+        applyFading();
     });
 });
+
+
+
 
 const win = [
     [0,1,2], [3,4,5], [6,7,8],
@@ -52,19 +87,23 @@ const checkWinner = () => {
  }
 };
 
-reset.addEventListener("click", ()=>{
-    cc=0;
+reset.addEventListener("click", () => {
+    cc = 0;
     turnX = true;
-    boxes.forEach((box)=> {
-      box.disabled = false;
-      box.innerText = "";
+    movesX = [];
+    movesO = [];
+    boxes.forEach((box) => {
+        box.disabled = false;
+        box.innerText = "";
+        box.classList.remove("fading");
     });
-      msg.classList.add("hide");
+    msg.classList.add("hide");
 });
 
-let checkDraw = () => {
-  if(cc==9 && msg.classList.contains("hide")){
-     msg.classList.remove("hide");
-     msg.innerText = `Game Draw`;
-  }
-};
+
+// let checkDraw = () => {
+//   if(cc==9 && msg.classList.contains("hide")){
+//      msg.classList.remove("hide");
+//      msg.innerText = `Game Draw`;
+//   }
+// };
