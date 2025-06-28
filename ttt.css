@@ -4,25 +4,25 @@
 }
 
 body{
-    color: #C5E9EB/*#FA7E61*/;
+    color: #fff;
     font-family: Arial, Helvetica, sans-serif;
     text-align: center;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: #1B4965;
+    background-color: #3C3C3C ;
 }
 .heading{
-    font-size: 3.8rem;
+    font-size: 3.3rem;
     margin-top: 30px;
-    font-weight: 800;
+    font-weight: 650;
 }
 .cont{
     margin-top: 50px;
-    height: 420px;
-    width: 420px;
-    gap: 10px;
+    height: 340px;
+    width: 340px;
+    gap: 7.5px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -35,23 +35,32 @@ body{
     width: 28%;
     font-size: 3.1rem;
     font-weight: 711;
-    color: black;
-    background-color: #fee1c7;
+    color: #3C3C3C;
+    background-color:#EDD3C4 ;
     border-radius: 12px;
 }
 .reset{
     cursor: pointer;
-    background-color: whitesmoke;
-    color: #1B4965;
+    background-color:#EDD3C4 ;
+    color: #3C3C3C;
     height: 59px;
     width: 150px;
     font-size: 2rem;
     font-weight: 749;
     margin-top: 40px;
+    margin-bottom: 40px;
     border-radius: 17px;
 }
+footer {
+    width: 100%;
+    background: #111;
+    color: #777;
+    padding: 20px;
+    text-align: center;
+    font-size: 1.4rem;
+}
 .win{
-    font-size: 3rem;
+    font-size: 3.2rem;
     margin-top: 30px;
     font-weight: 600;
 }
@@ -60,4 +69,8 @@ body{
 }
 .diff{
     color: red;
+}
+.fading {
+    opacity: 0.5;
+    transition: opacity 0.4s ease-in-out;
 }
